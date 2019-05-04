@@ -56,12 +56,13 @@
 
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
+  background: repeating-linear-gradient(45deg, #18a6c9, #18a6c9 100px, #127a96 160px, #127a96 320px, #127a96 160px);
 }
 
 .page {
-  height: 100%;
-  background: repeating-linear-gradient(45deg, #18a6c9, #18a6c9 100px, #127a96 160px, #127a96 320px, #127a96 160px);
+  max-height: 100vh;
+  padding-top: 40px;
 }
 
 .sun {
@@ -122,7 +123,7 @@ body {
 }
 
 .cloud3 {
-  @include cloudShape(250px, 30px, 500px);
+  @include cloudShape(250px, 200px, 100px);
   height: 100px;
   @include cloudAfter();
   @include cloudBefore();
@@ -132,11 +133,11 @@ body {
   @include cloudShape(325px, 10px, 10px, 'right');
 }
 .cloud5 {
-  @include cloudShape(325px, 70px, 260px, 'right');
+  @include cloudShape(325px, 40px, 260px, 'right');
 }
 
 .cloud6 {
-  @include cloudShape(250px, 20px, 530px, 'right');
+  @include cloudShape(250px, 200px, 100px, 'right');
   height: 100px;
   @include cloudAfter();
   @include cloudBefore();
@@ -149,11 +150,14 @@ body {
   background-color: rgb(214, 29, 45);
   position: absolute;
   bottom: 10px;
-  left: 50%;
+  left: 40%;
   transform: translateX(-50%);
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   border: 8px solid black;
+  box-shadow: inset 0 7px 9px -7px #000, inset 7px 0 9px -7px #000, inset -7px 0 9px -7px #000;
+
   &::before {
+    // belly
     content: '';
     display: block;
     height: 30%;
@@ -353,5 +357,214 @@ body {
   }
   &::after {
     @include forelock(10px, 20px, 30deg);
+  }
+}
+
+// My Fair Lady
+
+.bird-body.lady {
+  left: 60%;
+  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+  &::before {
+    // belly
+    height: 40%;
+    width: 85%;
+    top: 127px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.lady {
+  .tail {
+    left: 185px;
+    transform: rotate(0);
+    &::before {
+      transform: rotate(40deg);
+      top: 23px;
+    }
+    &::after {
+      transform: rotate(-60deg);
+      left: -7px;
+      bottom: 18px;
+    }
+  }
+
+  .forelock {
+    &::before {
+      @include forelock(20px, 40px, 150deg);
+      height: 30px;
+      border-width: 2px 0 2px 5px;
+    }
+    &::after {
+      @include forelock(10px, 20px, 130deg);
+      height: 30px;
+      border-width: 2px 0 2px 5px;
+    }
+  }
+  .mouth-up {
+    width: 50px;
+
+    border-radius: 87% 95% 5% 13%/11% 89% 91% 9%;
+    border-width: 5px 3px 5px 5px;
+
+    // transform: rotate(180deg);
+  }
+  .mouth-down {
+    height: 15px;
+    width: 30px;
+    position: relative;
+    top: -5px;
+    right: 0;
+    background-color: rgb(245, 155, 30);
+    border-radius: 100% 0% 18% 82% / 87% 0% 100% 13%;
+    border: solid #000;
+    border-width: 5px 3px 3px 5px;
+    transform: rotate(30deg);
+    z-index: 3;
+  }
+  .eyebrows {
+    position: relative;
+    height: 20px;
+    width: 100px;
+    top: 0;
+    left: 70px;
+    z-index: 2;
+    &::before {
+      top: -23px;
+      left: -45px;
+      width: 35%;
+      height: 80%;
+      transform: skew(0deg, 30deg);
+      border-radius: 3px 0 0 3px;
+    }
+    &::after {
+      top: -27px;
+      left: -20px;
+      transform: skew(0deg, 0deg);
+      width: 60px;
+      height: 50px;
+      border: solid 10px #000;
+      border-color: #000 transparent transparent transparent;
+      border-radius: 50%/50px 50px 0 0;
+      background: transparent;
+    }
+  }
+  .e-left {
+    top: -10px;
+    right: 45px;
+    &::before {
+      bottom: 20px;
+      left: 16px;
+      height: 15px;
+      width: 15px;
+    }
+  }
+  .e-right {
+    top: -10px;
+    right: 100px;
+    &::before {
+      bottom: 20px;
+      left: 20px;
+      height: 15px;
+      width: 15px;
+    }
+  }
+  .e-left-mood {
+    right: 4px;
+    top: -5px;
+    width: 40px;
+    height: 14px;
+    border-radius: 100% 0 0 0;
+    border: 3px solid #000;
+  }
+
+  .e-right-mood {
+    right: 0;
+    top: -5px;
+    width: 40px;
+    height: 14px;
+    border: 3px solid #000;
+  }
+}
+
+.kiss__btn {
+  display: block;
+  margin: 0 auto;
+}
+
+.heart {
+  background-color: red;
+  height: 30px;
+  transform: rotate(-45deg);
+  width: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &::before {
+    content: '';
+    background-color: red;
+    border-radius: 50%;
+    height: 30px;
+    position: absolute;
+    width: 30px;
+    top: -15px;
+    left: 0;
+  }
+  &::after {
+    content: '';
+    background-color: red;
+    border-radius: 50%;
+    height: 30px;
+    position: absolute;
+    width: 30px;
+    left: 15px;
+    top: 0;
+  }
+}
+
+@keyframes falling1 {
+  0% {
+    top: -10%;
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  20% {
+    opacity: 0.7;
+  }
+  40% {
+    transform: rotate(60deg);
+    opacity: 0.4;
+  }
+  70% {
+    transform: rotate(135deg);
+    opacity: 0.2;
+  }
+  100% {
+    top: 95%;
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes falling2 {
+  0% {
+    top: -10%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.4;
+  }
+  40% {
+    transform: rotate(-60deg);
+    opacity: 0.7;
+  }
+  70% {
+    transform: rotate(-120deg);
+    opacity: 1;
+  }
+  100% {
+    top: 95%;
+    transform: rotate(-225deg);
   }
 }
