@@ -1,3 +1,5 @@
+/********** MIXINS ********/
+
 @mixin cloudShape($width, $bottom, $side, $direction: 'left') {
   position: absolute;
   width: $width;
@@ -50,20 +52,132 @@
   background-color: rgb(214, 29, 45);
   border: solid #000;
   border-width: 2px 0 0 5px;
-  border-radius: 51% 49% 8% 92% / 40% 73% 27% 60%;
+  border-radius: 50% 40% 10% 90% / 40% 75% 30% 60%;
   transform: rotate($rotate);
 }
+
+@mixin eyelashes($top, $side, $direction: 'left') {
+  display: block;
+  content: '';
+  height: 20px;
+  border-style: solid;
+  border-color: #000;
+  border-width: 0 0 2px 0;
+  border-radius: 20px;
+  position: relative;
+  top: $top;
+  @if $direction == 'left' {
+    left: $side;
+  } @else {
+    right: $side;
+  }
+}
+
+@mixin ribbon {
+  width: 45px;
+  height: 45px;
+  background: #fcc560;
+  position: absolute;
+  top: -16px;
+  border: 2px solid #000;
+  transform: rotate(-45deg);
+  &::before {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 10px;
+    transform: rotate(-45deg);
+    border: solid 2px #000;
+    border-radius: 5px;
+    position: absolute;
+  }
+}
+
+@mixin eyesLady($right, $left) {
+  top: -10px;
+  right: $right;
+  &::before {
+    bottom: 20px;
+    left: $left;
+    height: 15px;
+    width: 15px;
+  }
+}
+
+@mixin eyebrowsLady($left) {
+  top: -23px;
+  left: $left;
+  transform: skew(0deg, 0deg);
+  width: 48px;
+  height: 50px;
+  border: solid 10px #000;
+  border-color: #000 transparent transparent transparent;
+  border-radius: 80%/40px 50px 0 0;
+  background: transparent;
+}
+
+/********** GENERAL ********/
 
 body {
   margin: 0;
   min-height: 100vh;
   background: repeating-linear-gradient(45deg, #18a6c9, #18a6c9 100px, #127a96 160px, #127a96 320px, #127a96 160px);
+
+  overflow: hidden;
 }
 
 .page {
   max-height: 100vh;
   padding-top: 40px;
 }
+
+.heart {
+  background-color: red;
+  height: 30px;
+  transform: rotate(-45deg);
+  width: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &::before {
+    content: '';
+    background-color: red;
+    border-radius: 50%;
+    height: 30px;
+    position: absolute;
+    width: 30px;
+    top: -15px;
+    left: 0;
+  }
+  &::after {
+    content: '';
+    background-color: red;
+    border-radius: 50%;
+    height: 30px;
+    position: absolute;
+    width: 30px;
+    left: 15px;
+    top: 0;
+  }
+}
+
+.love-btn {
+  display: block;
+  margin: 0 auto;
+  background-color: rgb(214, 29, 45);
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px 30px;
+  cursor: pointer;
+  &:hover {
+    background-color: darken(rgb(214, 29, 45), 10%);
+  }
+}
+
+/********** SKY ********/
 
 .sun {
   width: 100px;
@@ -76,15 +190,6 @@ body {
   box-shadow: 0px 0px 80px 8px yellow;
   animation: sunrise 4s ease-out infinite alternate;
   margin-top: 50px;
-}
-
-@keyframes sunrise {
-  0% {
-    margin-top: -100px;
-  }
-  100% {
-    margin-top: 50px;
-  }
 }
 
 .cloud {
@@ -143,6 +248,8 @@ body {
   @include cloudBefore();
 }
 
+/********** ANGRY BIRD ********/
+
 .bird-body {
   width: 190px;
   height: 210px;
@@ -178,7 +285,7 @@ body {
   height: 30px;
   width: 60px;
   background-color: #000;
-  border-radius: 82% 18% 9% 91% / 74% 91% 9% 26%;
+  border-radius: 80% 20% 10% 90% / 75% 90% 10% 25%;
   transform: rotate(180deg);
   &::before {
     content: '';
@@ -189,7 +296,7 @@ body {
     top: 20px;
     left: 0;
     transform: rotate(60deg);
-    border-radius: 82% 18% 9% 91% / 74% 91% 9% 26%;
+    border-radius: 80% 20% 10% 90% / 75% 90% 10% 25%;
   }
   &::after {
     content: '';
@@ -200,7 +307,7 @@ body {
     bottom: 20px;
     left: 0;
     transform: rotate(-40deg);
-    border-radius: 82% 18% 9% 91% / 74% 91% 9% 26%;
+    border-radius: 80% 20% 10% 90% / 75% 90% 10% 25%;
   }
 }
 
@@ -229,6 +336,7 @@ body {
   top: -15px;
   left: 105px;
 }
+
 .e-left {
   content: '';
   position: absolute;
@@ -250,6 +358,7 @@ body {
     border-radius: 50%;
   }
 }
+
 .e-right {
   content: '';
   position: absolute;
@@ -304,13 +413,13 @@ body {
   width: 80px;
   z-index: 5;
 }
+
 .mouth-up {
   height: 30px;
   width: 60px;
   position: relative;
   top: 3px;
   right: 0;
-
   background-color: rgb(251, 186, 30);
   border-radius: 11% 89% 91% 9% / 87% 95% 5% 13%;
   border: solid #000;
@@ -318,6 +427,7 @@ body {
   transform: skew(-30deg, 15deg);
   z-index: 3;
 }
+
 .mouth-down {
   height: 15px;
   width: 30px;
@@ -360,11 +470,13 @@ body {
   }
 }
 
-// My Fair Lady
+/********** MY FAIR LADY ********/
 
 .bird-body.lady {
   left: 60%;
   border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+  background: linear-gradient(to bottom, rgb(214, 29, 45) 0%, rgb(214, 29, 45) 90%, rgb(254, 224, 196) 90%, rgb(254, 224, 196) 100%);
+  background-color: rgb(214, 29, 45);
   &::before {
     // belly
     height: 40%;
@@ -372,10 +484,46 @@ body {
     top: 127px;
     left: 50%;
     transform: translateX(-50%);
+    background-color: #fee0c4;
   }
 }
 
 .lady {
+  .ribbon {
+    width: 20px;
+    height: 20px;
+    background: #fcc560;
+    position: absolute;
+    top: 10px;
+    left: 80px;
+    z-index: 5;
+    border: 2px solid #000;
+    transform: rotate(20deg);
+    border-radius: 5px;
+
+    .ribbon-right {
+      @include ribbon;
+      left: 18px;
+      border-radius: 20% 80% 80% 20% / 20% 20% 80% 80%;
+      &::before {
+        border-color: transparent #000 #000 transparent;
+        top: -1px;
+        left: -2px;
+      }
+    }
+
+    .ribbon-left {
+      @include ribbon;
+      right: 18px;
+      border-radius: 80% 20% 20% 80% / 80% 80% 20% 20%;
+      &::before {
+        border-color: #000 #000 transparent transparent;
+        top: 34px;
+        left: 32px;
+      }
+    }
+  }
+
   .tail {
     left: 185px;
     transform: rotate(0);
@@ -402,27 +550,27 @@ body {
       border-width: 2px 0 2px 5px;
     }
   }
+
   .mouth-up {
-    width: 50px;
-
-    border-radius: 87% 95% 5% 13%/11% 89% 91% 9%;
+    width: 45px;
+    height: 20px;
+    border-radius: 18% 82% 100% 0% / 100% 13% 87% 0%;
     border-width: 5px 3px 5px 5px;
-
-    // transform: rotate(180deg);
+    right: 68px;
+    top: 3px;
+    transform: rotate(170deg);
   }
+
   .mouth-down {
-    height: 15px;
+    height: 13px;
     width: 30px;
     position: relative;
-    top: -5px;
-    right: 0;
-    background-color: rgb(245, 155, 30);
-    border-radius: 100% 0% 18% 82% / 87% 0% 100% 13%;
-    border: solid #000;
-    border-width: 5px 3px 3px 5px;
-    transform: rotate(30deg);
-    z-index: 3;
+    top: -14px;
+    right: 57px;
+    transform: rotate(15deg);
+    z-index: 0;
   }
+
   .eyebrows {
     position: relative;
     height: 20px;
@@ -431,96 +579,73 @@ body {
     left: 70px;
     z-index: 2;
     &::before {
-      top: -23px;
-      left: -45px;
-      width: 35%;
-      height: 80%;
-      transform: skew(0deg, 30deg);
-      border-radius: 3px 0 0 3px;
+      @include eyebrowsLady(-58px);
     }
     &::after {
-      top: -27px;
-      left: -20px;
-      transform: skew(0deg, 0deg);
-      width: 60px;
-      height: 50px;
-      border: solid 10px #000;
-      border-color: #000 transparent transparent transparent;
-      border-radius: 50%/50px 50px 0 0;
-      background: transparent;
+      @include eyebrowsLady(-5px);
     }
   }
+
   .e-left {
-    top: -10px;
-    right: 45px;
-    &::before {
-      bottom: 20px;
-      left: 16px;
-      height: 15px;
-      width: 15px;
-    }
+    @include eyesLady(45px, 16px);
   }
+
   .e-right {
-    top: -10px;
-    right: 100px;
-    &::before {
-      bottom: 20px;
-      left: 20px;
-      height: 15px;
-      width: 15px;
-    }
+    @include eyesLady(90px, 20px);
   }
+
   .e-left-mood {
-    right: 4px;
+    position: relative;
+    right: 1px;
     top: -5px;
-    width: 40px;
-    height: 14px;
-    border-radius: 100% 0 0 0;
-    border: 3px solid #000;
+    width: 45px;
+    height: 18px;
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px;
+    .eyelashes {
+      height: 20px;
+      width: 20px;
+      &::before {
+        @include eyelashes(-8px, -40px, 'right');
+      }
+      &::after {
+        @include eyelashes(4px, -42px, 'right');
+        margin-top: -31px;
+        transform: rotate(20deg);
+      }
+    }
   }
 
   .e-right-mood {
-    right: 0;
+    position: relative;
+    right: -1px;
     top: -5px;
-    width: 40px;
-    height: 14px;
-    border: 3px solid #000;
+    width: 45px;
+    height: 18px;
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px;
+    .eyelashes {
+      height: 20px;
+      width: 20px;
+      &::before {
+        @include eyelashes(-10px, -15px);
+      }
+      &::after {
+        @include eyelashes(-29px, -17px);
+        transform: rotate(-20deg);
+      }
+    }
   }
 }
 
-.kiss__btn {
-  display: block;
-  margin: 0 auto;
-}
+/********** ANIMATIONS ********/
 
-.heart {
-  background-color: red;
-  height: 30px;
-  transform: rotate(-45deg);
-  width: 30px;
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  &::before {
-    content: '';
-    background-color: red;
-    border-radius: 50%;
-    height: 30px;
-    position: absolute;
-    width: 30px;
-    top: -15px;
-    left: 0;
+@keyframes sunrise {
+  0% {
+    margin-top: -100px;
   }
-  &::after {
-    content: '';
-    background-color: red;
-    border-radius: 50%;
-    height: 30px;
-    position: absolute;
-    width: 30px;
-    left: 15px;
-    top: 0;
+  100% {
+    margin-top: 50px;
   }
 }
 
@@ -542,8 +667,9 @@ body {
     opacity: 0.2;
   }
   100% {
-    top: 95%;
-    transform: rotate(180deg);
+    opacity: 0;
+    top: 90%;
+    transform: rotate(300deg);
   }
 }
 
@@ -561,10 +687,11 @@ body {
   }
   70% {
     transform: rotate(-120deg);
-    opacity: 1;
+    opacity: 0.4;
   }
   100% {
-    top: 95%;
-    transform: rotate(-225deg);
+    top: 90%;
+    opacity: 0;
+    transform: rotate(-270deg);
   }
 }
